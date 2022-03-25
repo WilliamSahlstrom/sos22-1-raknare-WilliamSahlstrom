@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/textViewMean"
-        android:layout_width="117dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        android:layout_width="160dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2" />
 
     <TextView
         android:id="@+id/helloText"
@@ -33,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Skriv ditt namn"
         android:inputType="textPersonName"
@@ -50,23 +49,23 @@
         app:layout_constraintStart_toEndOf="@+id/editTextName"
         app:layout_constraintTop_toTopOf="@+id/editTextName" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="112dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="76dp"
-        android:text="Medelvärde:"
-        app:layout_constraintStart_toStartOf="@+id/helloText"
-        app:layout_constraintTop_toBottomOf="@+id/helloText" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:onClick="calculate"
         android:text="Räkna"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="44dp" />
+        app:layout_constraintStart_toStartOf="@+id/helloText"
+        app:layout_constraintTop_toBottomOf="@+id/helloText" />
+
+    <TextView
+        android:id="@+id/datasetOut"
+        android:layout_width="278dp"
+        android:layout_height="183dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
