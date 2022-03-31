@@ -10,4 +10,15 @@ public class DataItem {
         this.name = name;
         this.value = value;
     }
+    //Getters
+    public double getValue() {
+        return value;
+    }
+    public String getName() {
+        return name;
+    }
+    //Setter
+    public void setValue(double value) {
+        this.value = value;
+    }
 }
