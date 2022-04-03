@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/textViewMean"
-        android:layout_width="192dp"
-        android:layout_height="127dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="247dp"
+        android:layout_height="243dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="4dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
@@ -24,6 +25,7 @@
         android:ems="10"
         android:hint="Namn"
         android:inputType="textPersonName"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,25 +49,14 @@
         app:layout_constraintStart_toStartOf="@+id/editTextName"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
-    <TextView
-        android:id="@+id/datasetOut"
-        android:layout_width="360dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="104dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/datasetRecyclerView"
         android:layout_width="409dp"
         android:layout_height="234dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/datasetOut"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMean"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMean" />
 
     <EditText
         android:id="@+id/editValue"
@@ -75,6 +66,7 @@
         android:ems="10"
         android:hint="Värde"
         android:inputType="numberDecimal"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/editTextName"
         app:layout_constraintTop_toTopOf="@+id/editTextName" />
 

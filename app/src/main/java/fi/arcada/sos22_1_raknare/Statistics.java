@@ -8,7 +8,7 @@ import java.util.Random;
 public class Statistics {
 
     // Metod för att generera en datamängd att testa med
-    public static ArrayList<DataItem> getSampleDataset() {
+    /*public static ArrayList<DataItem> getSampleDataset() {
         Random rnd = new Random();
 
         ArrayList<DataItem> sampleData = new ArrayList<>();
@@ -20,7 +20,9 @@ public class Statistics {
             sampleData.add(new DataItem(names[i], ages[i]));
         }
         return sampleData;
-    }
+    }*/
+
+
 
     // Metod för att skapa skild ArrayList med endast värdena från DataItems
     public static ArrayList<Double> getDataValues(ArrayList<DataItem> dataItems) {
@@ -40,16 +42,23 @@ public class Statistics {
         Collections.sort(sorted);
         return sorted;
     }
+    public static ArrayList<Double> getRevSorted(ArrayList<Double> dataset) {
+        // Vi måste skapa en kopia av vår datamängd så vi inte sorterar den ursprungliga
+        ArrayList<Double> sortedReverse = new ArrayList<>(dataset);
+        Collections.sort(sortedReverse, Collections.reverseOrder());
+        return sortedReverse;
+    }
+
     // min
-    public static double getMin(ArrayList<DataItem> dataItems) {
+    public static double getMin(ArrayList<Double> dataLista) {
         // Första värdet i vår sorterade arrayList
-        return getSorted(getDataValues(dataItems)).get(0);
+        return getSorted(dataLista).get(0);
     }
 
     // max
-    public static double getMax(ArrayList<DataItem> dataItems) {
+    public static double getMax(ArrayList<Double> dataset) {
         // sista värdet i vår sorterade arrayList
-        return getSorted(getDataValues(dataItems)).get(dataItems.size()-1);
+        return getSorted(dataset).get(dataset.size()-1);
     }
 
     // Medelvärde
@@ -60,6 +69,7 @@ public class Statistics {
         }
         return sum / dataset.size();
     }
+
     // Median
     public static double calcMedian(ArrayList<Double> dataset) {
         ArrayList<Double> sorted = getSorted(dataset);
@@ -67,13 +77,14 @@ public class Statistics {
         double median;
         if (sorted.size() % 2 == 0) {
             // Om antalet är jämnt, ta medelvärdet av de två mittersta
-            median = sorted.get(mid-1) + sorted.get(mid) / 2;
+            median = (sorted.get(mid-1) + sorted.get(mid)) / 2;
         } else {
             // Om antalet är udda, ta det mittersta värdet
             median = sorted.get(mid);
         }
         return median;
     }
+
     // Standardavvikelse (Standard Deviation
     public static double calcSD(ArrayList<Double> dataset) {
         double sumDiff = 0;
@@ -90,10 +101,10 @@ public class Statistics {
         return Math.sqrt(variance);
 
     }
+
     // Typvärde (eng. mode)
     public static double calcMode(ArrayList<Double> dataset) {
         HashMap<Double, Integer> valueCount = new HashMap<>();
-
 
         for (double dataValue: dataset) {
             Integer count = valueCount.get(dataValue);
@@ -124,4 +135,41 @@ public class Statistics {
         return modeValue;
 
     }
+    //Nedre Kvartil
+    public static double calcLQ(ArrayList<Double> dataset) {
+        ArrayList<Double> sorted = getSorted(dataset);
+        int mid = sorted.size() / 2 / 2;
+        double LQ;
+        if (sorted.size() % 2 == 0) {
+            // Om antalet är jämnt, ta medelvärdet av de två mittersta
+            LQ = (sorted.get(mid-1) + sorted.get(mid)) / 2;
+        } else {
+            // Om antalet är udda, ta det mittersta värdet
+            LQ = sorted.get(mid);
+        }
+        return LQ;
+    }
+    // Övre kvartilen
+    public static double calcUQ(ArrayList<Double> dataset) {
+        ArrayList<Double> sortedReverse = getRevSorted(dataset);
+        int mid = sortedReverse.size() / 2 / 2;
+        double UQ;
+        if (sortedReverse.size() % 2 == 0) {
+            // Om antalet är jämnt, ta medelvärdet av de två mittersta
+            UQ = (sortedReverse.get(mid-1) + sortedReverse.get(mid)) / 2;
+        } else {
+            // Om antalet är udda, ta det mittersta värdet
+            UQ = sortedReverse.get(mid);
+        }
+        return UQ;
+    }
+    // Inre kvartilavståndet
+    public static double calcQR(ArrayList<Double> dataset) {
+        double LQ = calcLQ(dataset);
+        double UQ = calcUQ(dataset);
+        double QR = UQ - LQ;
+        return QR;
+    }
+
+
 }

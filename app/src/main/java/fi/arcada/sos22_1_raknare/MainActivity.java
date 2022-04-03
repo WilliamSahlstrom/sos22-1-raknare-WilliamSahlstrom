@@ -30,27 +30,25 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialisera variabler
         textMean = findViewById(R.id.textViewMean);
-        textDataOut = findViewById(R.id.datasetOut);
+        //textDataOut = findViewById(R.id.datasetOut);
         editTextName = findViewById(R.id.editTextName);
         editValue = findViewById(R.id.editValue);
         recyclerView = findViewById(R.id.datasetRecyclerView);
 
         // Un-commenta denna rad om du behöver ett test-dataset
-        // dataItems = Statistics.getSampleDataset(); // ArrayList med testdata (flera DataItem-objekt)
+        //dataItems = Statistics.getSampleDataset(); // ArrayList med testdata (flera DataItem-objekt)
 
-        DatasetViewAdapter adapter = new DatasetViewAdapter(dataItems, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         dataset = Statistics.getDataValues(dataItems); // ArrayList med DataItem-objektens värden
 
         // Vi skriver tillfälligt ut vår datamängd
-        String dataOut = "";
+        /*String dataOut = "";
         // Vi skriver ut DataItem-datamängden
         for (DataItem item: dataItems) {
             dataOut += item.getName() + ":" + item.getValue() + " ";
         }
-        textDataOut.setText(dataOut);
+        textDataOut.setText(dataOut);*/
 
     }
 
@@ -59,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         double value = Double.parseDouble(editValue.getText().toString());
         // Sedan skapar vi ett nytt DataIte-objekt och lägger till vår ArrayList
         dataItems.add(new DataItem(editTextName.getText().toString(), value));
+        DatasetViewAdapter adapter = new DatasetViewAdapter(dataItems, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void calculate(View view) {
@@ -66,11 +67,17 @@ public class MainActivity extends AppCompatActivity {
         dataset = Statistics.getDataValues(dataItems);
 
         // %.2f i String.format() avrundar till två decimaler
-        String meanStr = String.format("Medelvärde: %.2f\n Median: %.2f\nStd.avvikelse: %.2f\nTypvärde: %.2f",
-                Statistics.calcMean(dataset),
-                Statistics.calcMedian(dataset),
-                Statistics.calcSD(dataset),
-                Statistics.calcMode(dataset)
+        String meanStr = String.format("%s: %.2f\n %s: %.2f\n%s: %.2f\n%s: %.2f\n%s:%.2f\n%s: %.2f\n%s: %.2f\n%s: %.2f\n%s: %.2f",
+                "Medelvärde", Statistics.calcMean(dataset),
+                "Median", Statistics.calcMedian(dataset),
+                "Std.avvikelse", Statistics.calcSD(dataset),
+                "Typvärde", Statistics.calcMode(dataset),
+                "Min", Statistics.getMin(dataset),
+                "Max", Statistics.getMax(dataset),
+                "Lägre Kvartil", Statistics.calcLQ(dataset),
+                "Högre Kvartil", Statistics.calcUQ(dataset),
+                "Kvartil Avstånd", Statistics.calcQR(dataset)
+
         );
 
         textMean.setText(meanStr);
